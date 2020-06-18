@@ -13,14 +13,18 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+let smtp_login = process.env.SMPT_LOGIN || " ";
+let smtp_password = process.env.SMPT_PASSWORD || "--";
+
+
 let transporter = nodemailer.createTransport({
   service: "gmail",
   /*host: "smtp.ethereal.email",
   port: 587,
   secure: false, // true for 465, false for other ports*/
   auth: {
-    user: 'vantreysmtp@gmail.com', // generated ethereal user
-    pass: 'kelmeteka12345687', // generated ethereal password
+    user: smtp_login, //'vantreysmtp@gmail.com', // generated ethereal user
+    pass: smtp_password //'kelmeteka12345687', // generated ethereal password
   },
 });
 
@@ -50,6 +54,8 @@ app.post('/sendMessage', async function (req, res) {
   res.send(req.body)
 })
 
-app.listen(3010, function () {
-  console.log('Example app listening on port 3000!');
+let port = process.env.PORT || 3010;
+
+app.listen(port, function () {
+  console.log('Example app listening on port 3010!');
 });
