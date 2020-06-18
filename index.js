@@ -16,23 +16,20 @@ app.use(bodyParser.json())
 let smtp_login = process.env.SMPT_LOGIN || " ";
 let smtp_password = process.env.SMPT_PASSWORD || "--";
 
-
 let transporter = nodemailer.createTransport({
   service: "gmail",
   /*host: "smtp.ethereal.email",
   port: 587,
   secure: false, // true for 465, false for other ports*/
   auth: {
-    user: smtp_login, //'vantreysmtp@gmail.com', // generated ethereal user
-    pass: smtp_password //'kelmeteka12345687', // generated ethereal password
+    user: smtp_login,  // generated ethereal user
+    pass: smtp_password  // generated ethereal password
   },
 });
 
 app.get('',  function (req, res) {
   res.send('hello')
 });
-
-
 
 app.post('/sendMessage', async function (req, res) {
 
